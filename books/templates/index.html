@@ -1,0 +1,15 @@
+<html land='en'>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+  <body>
+    {% for book in books %}
+      <h2>{{book.name}}</h2>
+      <br>
+      <img src={{ media_link }}{{ book.image_set.all.first.image }}>
+      <br>
+    {% endfor %}
+
+  </body>
+</html>
