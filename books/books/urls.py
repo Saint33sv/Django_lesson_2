@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from store.views import books_page
+from store.views import books_page, get_post
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', books_page)
+    path('index/', books_page),
+    path('post/<int:book_id>/', get_post, name="post")
 ]
 
 if settings.DEBUG:
