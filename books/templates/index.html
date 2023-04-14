@@ -1,15 +1,26 @@
+{% load static %}
 <html land='en'>
   <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href={% static 'css/style.css' %} />
   </head>
   <body>
-    {% for book in books %}
-      <h2>{{book.name}}</h2>
-      <br>
-      <img src={{ media_link }}{{ book.image_set.all.first.image }}>
-      <br>
+    <div class='wrapper_block_book'>
+    {% for info in data %}
+      <div class='block_book'>
+        <div class='img_block_book'>
+          <img src={{ media_link }}{{ info.img }}>
+        </div>
+        <div class='description_book'>
+          <h2 class='header_block_book'>{{ info.book }}</h2>
+          <div class='price_book'>
+            <div>Цена:</div>
+            <div>{{ info.price }}</div>
+          </div>
+        </div>
+      </div>
     {% endfor %}
-
+    </div>
   </body>
 </html>
