@@ -9,8 +9,13 @@
     <header>
       <div class='container'>
         <div class='logo'>
-          <a href="#"><img src={{media_link}}logo/logo.png alt=""></a>
+          <a href={% url 'home' %}><img src={{media_link}}logo/logo.png alt=""></a>
         </div>
+        {% for item in menu %}
+        <nav class='main_menu'>
+          <a href={% url item.url_name %}>{{ item.title }}</a>
+        </nav>
+        {% endfor %}
       </div>
     </header>
     <main>

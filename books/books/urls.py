@@ -17,13 +17,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from store.views import books_page, get_post
+from store.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', books_page, name='home'),
-    path('post/<int:book_id>/', get_post, name="post")
+    path('post/<int:book_id>/', get_post, name="post"),
+    path('about/', about_page, name="about"),
+    path('add_book/', add_book_page, name="add_book"),
+    path('contact/', contact_page, name="contact"),
+    path('login/', login_page, name="login"),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

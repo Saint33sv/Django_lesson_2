@@ -21,6 +21,21 @@ def books_page(request):
         'menu': menu
         })
 
+def about_page(request):
+        return render(request, "about.html")
+
+
+def add_book_page(request):
+        return render(request, "add_book.html")
+
+
+def contact_page(request):
+        return render(request, "contact.html")
+
+
+def login_page(request):
+        return render(request, "login.html")
+
 
 def get_post(request, book_id):
     book = Book.objects.get(id=book_id)
