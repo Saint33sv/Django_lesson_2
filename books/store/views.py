@@ -9,9 +9,16 @@ def books_page(request):
              'img': book.image_set.all().first().image,
              'price': book.price,
              'url': book.get_absolute_url()} for book in books]
+    menu = [
+            {'title': 'О сайте', 'url_name': 'about'},
+            {'title': 'Добавить книгу', 'url_name': 'add_book'},
+            {'title': 'Обратная связь', 'url_name': 'contact'},
+            {'title': 'Войти', 'url_name': 'login'},
+            ]
     return render(request, 'index.html', {
         'data': data,
         'media_link': settings.MEDIA_URL,
+        'menu': menu
         })
 
 

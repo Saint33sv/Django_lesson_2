@@ -21,7 +21,7 @@ from store.views import books_page, get_post
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', books_page),
+    path('index/', books_page, name='home'),
     path('post/<int:book_id>/', get_post, name="post")
 ]
 

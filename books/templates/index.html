@@ -6,21 +6,30 @@
     <link rel="stylesheet" href={% static 'css/style.css' %} />
   </head>
   <body>
-    <div class='wrapper_block_book'>
-    {% for info in data %}
-      <div class='block_book'>
-        <div class='img_block_book'>
-          <img src={{ media_link }}{{ info.img }}>
+    <header>
+      <div class='container'>
+        <div class='logo'>
+          <a href="#"><img src={{media_link}}logo/logo.png alt=""></a>
         </div>
-        <div class='description_book'>
-          <a href="{{ info.url }}"><h2 class='header_block_book'>{{ info.book }}</h2></a>
-          <div class='price_book'>
-            <div>Цена:</div>
-            <div>{{ info.price }}</div>
+      </div>
+    </header>
+    <main>
+      <div class='wrapper_block_book'>
+      {% for info in data %}
+        <div class='block_book'>
+          <div class='img_block_book'>
+            <img src={{ media_link }}{{ info.img }}>
+          </div>
+          <div class='description_book'>
+            <a href="{{ info.url }}"><h2 class='header_block_book'>{{ info.book }}</h2></a>
+            <div class='price_book'>
+              <div>Цена:</div>
+              <div>{{ info.price }}</div>
           </div>
         </div>
       </div>
-    {% endfor %}
-    </div>
+      {% endfor %}
+      </div>
+    </main>
   </body>
 </html>
