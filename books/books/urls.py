@@ -21,7 +21,7 @@ from store.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', books_page, name='home'),
+    path('', books_page, name='home'),
     path('post/<int:book_id>/', get_post, name="post"),
     path('about/', about_page, name="about"),
     path('add_book/', add_book_page, name="add_book"),
