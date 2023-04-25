@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Image
+from .models import Image, StatImage
 
 
 @admin.register(Image)
@@ -8,3 +8,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title') # Выставит поле как ссылку на обьект
     search_fields = ('title', 'book') # Добавляет поле для поиска, ищит по указаным полям
     
+
+@admin.register(StatImage)
+class StatImageAdmin(admin.ModelAdmin):
+    pass

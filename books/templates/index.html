@@ -6,24 +6,28 @@
     <link rel="stylesheet" href={% static 'css/style.css' %} />
   </head>
   <body>
+    {% block header %}
     <header>
       <div class='container'>
         <div class='logo'>
-          <a href={% url 'home' %}><img src={{media_link}}logo/logo.png alt=""></a>
+          <a href={% url 'home' %}><img src={{ logo_img }} alt=""></a>
         </div>
         {% for item in menu %}
-        <nav class='main_menu'>
+        <div class='main_menu'>
           <a href={% url item.url_name %}>{{ item.title }}</a>
-        </nav>
+        </div>
         {% endfor %}
       </div>
     </header>
+    {% endblock header %}
+
+    {% block main %}
     <main>
       <div class='wrapper_block_book'>
       {% for info in data %}
         <div class='block_book'>
           <div class='img_block_book'>
-            <img src={{ media_link }}{{ info.img }}>
+            <img src={{ info.img }}>
           </div>
           <div class='description_book'>
             <a href="{{ info.url }}"><h2 class='header_block_book'>{{ info.book }}</h2></a>
@@ -35,6 +39,7 @@
       </div>
       {% endfor %}
       </div>
-    </main>
+      </main>
+      {% endblock main %}
   </body>
 </html>

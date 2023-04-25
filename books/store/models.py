@@ -8,6 +8,7 @@ class Book(models.Model):
     author_name = models.CharField(max_length=50, verbose_name='Автор')
     price = models.DecimalField(max_digits=7, decimal_places=2, 
                                 null=True, verbose_name='Цена')
+    cat = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.name
@@ -21,3 +22,14 @@ class Book(models.Model):
         verbose_name = 'Книги' # отобразить в админке модель Book как Книги
         verbose_name_plural = 'Книги' # Убрать символ 's' в конце названия модели
         ordering = ['-name', 'price'] # Сортиповка записей в модели
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Категория')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Категории'
+        verbose_name_plural = 'Категории'

@@ -1,13 +1,8 @@
-<html land='en'>
-  <head>
-    <meta charset="UTF-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>{{ name }}</h1>
+{% extends "index.html" %}
+{% block main %}
+    <h1>{{ data.name }}</h1>
     <br>
-    <img src={{ path }}{{ img }}>
-    <h2>Цена: {{ price }}</h2>
-    <p>{{ post }}</p>
-  </body>
-</html>
+    <img src={{ data.img }}>
+    <h2>Цена: {{ data.price }}</h2>
+    <p>{{ data.post }}</p>
+{% endblock main %}
