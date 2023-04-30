@@ -16,6 +16,15 @@ header{
   background-color: #040104d9;
 }
 
+main{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.side_bar{
+  background-color: #7e7777;
+}
+
 .container{
   display: flex;
   justify-content: space-between;

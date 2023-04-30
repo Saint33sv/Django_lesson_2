@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
-from .models import Book
-from gallery.models import StatImage
+from .models import Book, Category
+from .forms import AddBookForm
 
 
 def books_page(request):
@@ -10,24 +10,27 @@ def books_page(request):
              'img': f"{settings.MEDIA_URL}{book.image_set.all().first().image}",
              'price': book.price,
              'url': book.get_absolute_url()} for book in books]
-    menu = [
-            {'title': 'О сайте', 'url_name': 'about'},
-            {'title': 'Добавить книгу', 'url_name': 'add_book'},
-            {'title': 'Обратная связь', 'url_name': 'contact'},
-            {'title': 'Войти', 'url_name': 'login'},
-            ]
-    return render(request, 'index.html', {
-        'data': data,
-        'menu': menu,
-        'logo_img': f"{settings.MEDIA_URL}{get_object_or_404(StatImage, id=1).image}"
-        })
+    return render(request, 'index.html', {'data': data})
 
 def about_page(request):
         return render(request, "about.html")
 
 
 def add_book_page(request):
-        return render(request, "add_book.html")
+    if request.method == 'POST':
+        form = AddBookForm(request.POST)
+        if form.is_valid():
+            try:
+                Book.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, 'Ошибка добавления книги')
+    else:
+        form = AddBookForm()
+    return render(request, "add_book.html", {
+        'title': 'Добавить книку',
+        'form': form,
+        })
 
 
 def contact_page(request):
@@ -38,23 +41,21 @@ def login_page(request):
         return render(request, "login.html")
 
 
-def get_post(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
+def get_post(request, book_slug):
+    book = get_object_or_404(Book, slug=book_slug)
     data = {
             'name': book.name,
             'price': book.price,
             'post': book.description,
             'img':  f"{settings.MEDIA_URL}{book.image_set.all().first().image}",
-}
-    menu = [
-            {'title': 'О сайте', 'url_name': 'about'},
-            {'title': 'Добавить книгу', 'url_name': 'add_book'},
-            {'title': 'Обратная связь', 'url_name': 'contact'},
-            {'title': 'Войти', 'url_name': 'login'},
-            ]
-    return render(request, 'post.html', {
-        'data': data,
-        'menu': menu,
-        'logo_img': 
-        f"{settings.MEDIA_URL}{get_object_or_404(StatImage, id=1).image}"
-        })
+    }
+    return render(request, 'post.html', context=data)
+
+def get_cats(request, cat_slug):
+    category = get_object_or_404(Category, slug=cat_slug)
+    books = Book.objects.filter(cat=category)
+    data = [{'book': book.name, 
+             'img': f"{settings.MEDIA_URL}{book.image_set.all().first().image}",
+             'price': book.price,
+             'url': book.get_absolute_url()} for book in books]
+    return render(request, 'cats.html', {'data': data})

@@ -8,8 +8,9 @@ class BookAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name') # Выставит поле как ссылку на обьект
     search_fields = ('name', 'price') # Добавляет поле для поиска, ищит по указаным полям
     list_filter = ('name', 'price') # Фильтер по полям
+    prepopulated_fields = {"slug": ("name",)}
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}

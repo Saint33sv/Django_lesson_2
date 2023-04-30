@@ -1,0 +1,10 @@
+<div class='container'>
+  <div class='logo'>
+      <a href={% url 'home' %}><img src={{ logo_img }} alt=""></a>
+  </div>
+  {% for item in menu %}
+    <div class='main_menu'>
+      <a href={% url item.url_name %}>{{ item.title }}</a>
+    </div>
+  {% endfor %}
+</div>

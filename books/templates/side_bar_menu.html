@@ -1,0 +1,11 @@
+<br>
+<div>
+  <a href={% url "home" %}>Все категории</a>
+</div>
+{% for cat in data %}
+<br>
+  <div>
+    <a href={{ cat.url }}>{{ cat.name }}</a>
+  </div>
+<br>
+{% endfor %}
