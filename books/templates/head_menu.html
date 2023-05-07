@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='logo'>
-      <a href={% url 'home' %}><img src={{ logo_img }} alt=""></a>
+      <a href={% url 'home' %}><img src={{ logo_img.url }} alt=""></a>
   </div>
   {% for item in menu %}
     <div class='main_menu'>

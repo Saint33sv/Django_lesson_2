@@ -8,7 +8,10 @@ class Book(models.Model):
     author_name = models.CharField(max_length=50, verbose_name='Автор')
     price = models.DecimalField(max_digits=7, decimal_places=2, 
                                 null=True, verbose_name='Цена')
-    cat = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True)
+    img = models.ImageField(upload_to='images', null=True, verbose_name='Фото')
+    cat = models.ForeignKey('Category', 
+                            on_delete=models.DO_NOTHING, 
+                            null=True, verbose_name='Категории')
     slug = models.SlugField(max_length=100, unique=True, 
                             db_index=True, verbose_name='URL')
 

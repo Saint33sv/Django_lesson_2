@@ -1,8 +1,13 @@
 {% extends "index.html" %}
+{% block title %}
+<title>{{ title }}</title>
+{% endblock title %}
 {% block main %}
-    <h1>{{ name }}</h1>
-    <br>
-    <img src={{ img }}>
-    <h2>Цена: {{ price }}</h2>
-    <p>{{ post }}</p>
+<div>
+  <h1>{{ data.name }}</h1>
+  <br>
+  <img src={{ data.img.url }}>
+  <h2>Цена: {{ data.price }}</h2>
+  <p>{{ data.description }}</p>
+</div>
 {% endblock main %}
