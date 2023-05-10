@@ -25,6 +25,17 @@ main{
   background-color: #7e7777;
 }
 
+.selected{
+  text-transform: uppercase;
+  font-family: sans-serif;
+  color: #a11919d9;
+}
+
+ul.category li{
+  list-style-type: none;
+  padding: 10px 20px;
+}
+
 .container{
   display: flex;
   justify-content: space-between;
@@ -37,6 +48,10 @@ div a{
   text-transform: uppercase;
   font-family: sans-serif;
   color: #0ba6b7;
+}
+
+div a:hover{
+  opacity: 0.5;
 }
 
 .img_block_book img{
@@ -63,3 +78,35 @@ div a{
   padding-right:20px;
 }
 
+.list_pages{
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+a.num_page{
+  font-size: 16px;
+  color: #ccc;
+  display: block;
+  padding: 20px 25px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.num_page:last-child{
+  margin-right: 0;
+}
+
+a.num_page:hover{
+  border-color: #000; 
+  color: #000;
+}
+
+a.num_page:hover{
+  background-color: #dbedea;
+}
+
+.select_page{
+  color: green !important;
+}

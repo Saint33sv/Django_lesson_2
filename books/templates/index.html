@@ -11,13 +11,37 @@
   <body>
     {% block header %}
     <header>
-      {% get_head_menu %} 
+      <div class='container'>
+        <div class='logo'>
+          <a href={% url 'home' %}><img src={{ logo_img.url }} alt=""></a>
+        </div>
+      {% for item in menu %}
+        <div class='main_menu'>
+          <a href={% url item.url_name %}>{{ item.title }}</a>
+        </div>
+      {% endfor %}
+      </div> 
     </header>
     {% endblock header %}
 
     <main>
       <div class='side_bar'>
-        {% get_side_bar %}
+        <ul class='category'>
+        {% if cat_selected == 0 %}
+          <li class='selected'>Все категории</li>
+        {% else %}
+          <li><a class="color_item" href={% url "home" %}>Все категории</a></li>
+        {% endif %}
+        {% for cat in cats %}
+        {% if cat.book__count > 0 %}
+        {% if cat.pk == cat_selected %}
+          <li class='selected'>{{ cat.name }}</li>
+        {% else %}
+          <li><a class="color_item" href={{ cat.get_absolute_url }}>{{ cat.name }}</a></li>  
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        </ul>
       </div>
       {% block main %}
       <div class='wrapper_block_book'>
@@ -38,7 +62,25 @@
       </div>
       {% endfor %}
       </div>
-      {% endblock main %}
+      {% endblock main %} 
       </main>
+      <!-- Пагинация страниц, постраничная навигация -->
+      {% if page_obj.has_other_pages %}
+      <div class='list_pages'>
+        {% if page_obj.has_previous %}
+        <a class="num_page" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% endif %}
+        {% for p in paginator.page_range %}
+        {% if page_obj.number == p %}
+        <a class='num_page select_page' href="?page={{ p}}">{{ p }}</a>
+        {% elif p >= page_obj.number|add:-1 and p <= page_obj.number|add:1 %}
+        <a class="num_page" href="?page={{ p }}">{{ p }}</a>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a class="num_page" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        {% endif %}
+      </div>
+      {% endif %}
   </body>
 </html>
