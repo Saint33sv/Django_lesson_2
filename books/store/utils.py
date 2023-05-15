@@ -8,7 +8,6 @@ menu = [
             {'title': 'О сайте', 'url_name': 'about'},
             {'title': 'Добавить книгу', 'url_name': 'add_book'},
             {'title': 'Обратная связь', 'url_name': 'contact'},
-            {'title': 'Войти', 'url_name': 'login'},
     ]
 
 class DataMixin:

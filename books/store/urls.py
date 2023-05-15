@@ -9,5 +9,7 @@ urlpatterns = [
     path('about/', about_page, name="about"),
     path('add_book/', AddBook.as_view(), name="add_book"),
     path('contact/', contact_page, name="contact"),
-    path('login/', login_page, name="login"),
+    path('login/', LoginUser.as_view(), name="login"),
+    path('logout/', logout_user, name="logout"),
+    path('register/', RegisterUser.as_view(), name="register"),
 ]
