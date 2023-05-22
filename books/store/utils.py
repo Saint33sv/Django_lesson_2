@@ -11,7 +11,7 @@ menu = [
     ]
 
 class DataMixin:
-    paginate_by = 3
+    paginate_by = 40
     """Вынос дублирования кода в классах представления в отдельный класс"""
     def get_user_context(self, **kwargs):
         context = kwargs

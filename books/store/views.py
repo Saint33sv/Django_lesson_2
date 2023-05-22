@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth import logout, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 
-from .models import Book
-from .forms import AddBookForm, CreateUserForm, LoginUserForm
+from .models import Book, Category
+from .forms import AddBookForm, CreateUserForm, LoginUserForm, ContactForm
 from .utils import DataMixin
 
 
@@ -73,8 +73,23 @@ class AddBook(LoginRequiredMixin, DataMixin, CreateView):
     #        })
 
 
-def contact_page(request):
-        return render(request, "contact.html")
+#def contact_page(request):
+#        return render(request, "contact.html")
+
+
+class ContactFormView(DataMixin, FormView):
+    form_class = ContactForm
+    template_name = "contact.html"
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title='Обратная связь')
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return redirect('home')
 
 
 class PostBook(DataMixin, DetailView):
@@ -106,12 +121,14 @@ class BookCategory(DataMixin, ListView):
     allow_empty = False
 
     def get_queryset(self):
-        return Book.objects.filter(cat__slug=self.kwargs['cat_slug'])
+        return Book.objects.filter(cat__slug=self.kwargs['cat_slug'
+                                                         ]).select_related('cat')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title=str(context['data'][0].cat),
-                                      cat_selected=context['data'][0].cat_id)
+        c = Category.objects.get(slug=self.kwargs['cat_slug'])
+        c_def = self.get_user_context(title=str(c.name),
+                                      cat_selected=c.pk)
         return dict(list(context.items()) + list(c_def.items()))
 
 #def get_cats(request, cat_slug):

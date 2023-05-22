@@ -110,3 +110,13 @@ a.num_page:hover{
 .select_page{
   color: green !important;
 }
+
+.main_menu{
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+}
+
+.main_menu > div{
+  margin-right: 20px;
+}

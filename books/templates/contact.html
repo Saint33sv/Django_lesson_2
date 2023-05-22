@@ -1,10 +1,25 @@
-<html land='en'>
-  <head>
-    <meta charset="UTF-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Обратная связь!</h1>
-  </body>
-</html>
+{% extends "index.html" %}
+{% block main %}
+<div>
+  <div>
+    <h1>{{ title }}</h1>
+  </div>
+  <br>
+  <div>  
+    <form action={% url 'contact' %} method='post' enctype='multipart/form-data'>
+      {% csrf_token %}
+      <div>
+        {{ form.non_field_errors }}
+      </div>
+      {% for f in form %}
+        <p><label for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+        <div>
+          {{ f.errors }}
+        </div>
+      {% endfor %}
+      <button type="submit">Добавить</button>
+    </form>
+  </div>
+</div>
+{% endblock main %}
 
